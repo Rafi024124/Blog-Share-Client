@@ -1,10 +1,18 @@
 import React from 'react';
 import Home from '../pages/Home';
+import { Outlet } from 'react-router-dom';
+import Logo from '../Components/Logo';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
+
 
 const MainLayout = () => {
     return (
         <div>
-            <Home></Home>
+            <Logo></Logo>
+            <Navbar></Navbar>
+            <Outlet></Outlet>
+            <Footer></Footer>
         </div>
     );
 };

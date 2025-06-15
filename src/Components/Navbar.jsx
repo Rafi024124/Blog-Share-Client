@@ -1,6 +1,7 @@
 // import React, { useContext } from 'react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from '../providers/AuthProvider';
 // import logo from "../assets/blog logo.png";
 // import { AuthContext } from '../providers/AuthProvider';
 
@@ -17,7 +18,7 @@ const Navbar = () => {
   //         console.log(error);
   //       });
   //   };
-
+  const {user } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -31,26 +32,28 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
+      {user && 
       <li>
-        <NavLink to="/add-blog" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
+        <NavLink to="/addBlogs" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
           Add Blog
         </NavLink>
-      </li>
+      </li>}
       <li>
-        <NavLink to="/all-blogs" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
+        <NavLink to="/allBlogs" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
           All Blogs
         </NavLink>
       </li>
       <li>
-        <NavLink to="/featured-blogs" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
+        <NavLink to="/featuredBlogs" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
           Featured Blogs
         </NavLink>
       </li>
+      {user &&
       <li>
-        <NavLink to="/wishlist" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
+        <NavLink to="/myWishList" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
           Wishlist
         </NavLink>
-      </li>
+      </li>}
     </>
   );
 

@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.8",
+    "@tanstack/react-table": "^8.21.3",
     "axios": "^1.10.0",
     "firebase": "^11.9.0",
+    "framer-motion": "^12.18.1",
     "helmet": "^8.1.0",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.1",

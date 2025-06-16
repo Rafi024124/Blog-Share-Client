@@ -6,6 +6,7 @@ import Lottie from 'lottie-react';
 import Swal from 'sweetalert2';
 import registerLottieData from '../assets/lottie/register.json';
 import loginPic from '../assets/loginpic.jpg'
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,7 +16,12 @@ const Login = () => {
 
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
-      .then(() => {
+      .then(async(result) => {
+        const userEmail = result.user.email;
+        await axios.post('http://localhost:3000/jwt', { email: userEmail }, {
+        withCredentials: true
+      });
+        
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -35,6 +41,12 @@ const Login = () => {
 
     signInUser(email, password)
       .then(() => {
+        const user = {email: email}
+        axios.post('http://localhost:3000/jwt',user,{withCredentials:true})
+        .then(res=>{
+          console.log(res.data);
+          
+        })
         e.target.reset();
         navigate(from, { replace: true });
       })

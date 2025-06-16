@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 
 import { AuthContext } from "../../providers/AuthProvider";
+import axios from "axios";
 
 const AddBlogs = () => {
   // const navigate = useNavigate();
@@ -18,16 +19,12 @@ const AddBlogs = () => {
     blogData.author = user?.displayName || "Anonymous";
     blogData.email = user?.email || "unknown";
 
-    fetch(`http://localhost:3000/blogs`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(blogData),
+    axios.post(`http://localhost:3000/blogs`,blogData,{
+       withCredentials: true
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+      
+      .then((res) => {
+        if (res.data.insertedId) {
           Swal.fire({
             title: "Blog added successfully!",
             icon: "success",

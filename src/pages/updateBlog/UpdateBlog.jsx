@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
+import axios from "axios";
 
 const UpdateBlog = () => {
   const { user } = useContext(AuthContext);
@@ -13,11 +14,14 @@ const UpdateBlog = () => {
 
   // Load blog details
   useEffect(() => {
-    fetch(`http://localhost:3000/blogs/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogData(data);
-        setImageURL(data.image);
+    axios
+      .get(`http://localhost:3000/blogs/${id}`)
+      .then((res) => {
+        setBlogData(res.data);
+        setImageURL(res.data.image);
+      })
+      .catch((err) => {
+        console.error("Error fetching blog:", err);
       });
   }, [id]);
 
@@ -29,16 +33,12 @@ const UpdateBlog = () => {
     updatedData.author = user?.displayName || "Anonymous";
     updatedData.email = user?.email || "unknown";
 
-    fetch(`http://localhost:3000/blogs/${id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
+    axios
+      .put(`http://localhost:3000/blogs/${id}`, updatedData, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
           Swal.fire({
             title: "Blog updated successfully!",
             icon: "success",
@@ -47,6 +47,15 @@ const UpdateBlog = () => {
           });
           navigate(`/blogDetails/${id}`);
         }
+      })
+      .catch((err) => {
+        console.error("Error updating blog:", err);
+        Swal.fire({
+          title: "Failed to update blog",
+          icon: "error",
+          timer: 1500,
+          showConfirmButton: false,
+        });
       });
   };
 

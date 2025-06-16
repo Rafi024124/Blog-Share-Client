@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from '../providers/AuthProvider';
+import BlogLoader from './BlogLoader';
 // import logo from "../assets/blog logo.png";
 // import { AuthContext } from '../providers/AuthProvider';
 
@@ -18,7 +19,7 @@ const Navbar = () => {
   //         console.log(error);
   //       });
   //   };
-  const {user } = useContext(AuthContext);
+  const {user, isLoading } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -56,6 +57,11 @@ const Navbar = () => {
       </li>}
     </>
   );
+
+ if(isLoading){
+    return <BlogLoader></BlogLoader>
+ }
+
 
   return (
     <div

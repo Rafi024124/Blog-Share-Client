@@ -13,12 +13,14 @@ import PrivateRoute from "./PrivateRoute";
 import MyWishList from "../pages/myWishList/MyWishList";
 import UpdateBlog from "../pages/updateBlog/UpdateBlog";
 import FeaturedBlogs from "../pages/featuredBlogs/FeaturedBlogs";
+import ErrorPage from "../pages/ErrorPage";
 
 
    const Router = createBrowserRouter([
     {
         path: '/',
         element:<MainLayout></MainLayout>,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',

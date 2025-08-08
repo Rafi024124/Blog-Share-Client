@@ -20,6 +20,10 @@ const Register = () => {
   Swal.fire('Error', 'Password must contain at least one uppercase letter.', 'error');
   return;
 }
+if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+  Swal.fire('Error', 'Password must contain at least one special character.', 'error');
+  return;
+}
 
 if (!/[a-z]/.test(password)) {
   Swal.fire('Error', 'Password must contain at least one lowercase letter.', 'error');

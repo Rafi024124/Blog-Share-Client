@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const AllBlogs = () => {
   const { user } = useContext(AuthContext);
@@ -38,35 +39,51 @@ const AllBlogs = () => {
   };
 
   const handleWishlist = (blog) => {
-    // eslint-disable-next-line no-unused-vars
-    const { _id, email, ...rest } = blog;
+    const { _id,  ...rest } = blog;
     const wishList = {
       userEmail: user?.email,
       blogId: _id,
       ...rest,
     };
 
-    fetch(`http://localhost:3000/wishlist`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(wishList),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
+    axios
+      .post(`http://localhost:3000/wishlist`, wishList, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        if (res.data.insertedId) {
+          
           Swal.fire({
             title: "Added to wishlist!",
             icon: "success",
             timer: 1200,
             showConfirmButton: false,
           });
+          console.log(res.data);
+          
+        }
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 409) {
+          Swal.fire("Oops!", "This blog is already in your wishlist.", "info");
+        } else if (error.response && error.response.status === 403) {
+          Swal.fire(
+            "Forbidden!",
+            "You are not allowed to perform this action.",
+            "error"
+          );
+        } else {
+          Swal.fire("Error!", "Something went wrong.", "error");
         }
       });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-14 px-6 md:px-12">
-      <h2 className="text-4xl font-extrabold text-center text-[#A53860] mb-12 tracking-tight">
+    <div className="min-h-screen py-14 px-6 md:px-12" style={{ backgroundColor: "#fff" }}>
+      <h2
+        className="text-4xl font-extrabold text-center mb-12 tracking-tight"
+        style={{ color: "#AA98A9" }}
+      >
         All Blogs
       </h2>
 
@@ -76,17 +93,35 @@ const AllBlogs = () => {
           placeholder="Search by title..."
           value={searchTerm}
           onChange={handleSearch}
-          className="input input-bordered w-full sm:w-72 rounded-lg border-gray-300 focus:border-[#A53860] focus:ring-2 focus:ring-[#A53860] transition"
+          className="input input-bordered w-full sm:w-72 rounded-lg"
+          style={{
+            borderColor: "#AA98A9",
+            color: "#AA98A9",
+            backgroundColor: "#F7F6FB", // very light lavender tint for inputs
+          }}
         />
         <select
           value={category}
           onChange={handleCategoryChange}
-          className="select select-bordered w-full sm:w-72 rounded-lg border-gray-300 focus:border-[#A53860] focus:ring-2 focus:ring-[#A53860] transition"
+          className="select select-bordered w-full sm:w-72 rounded-lg"
+          style={{
+            borderColor: "#AA98A9",
+            color: "#AA98A9",
+            backgroundColor: "#F7F6FB",
+          }}
         >
-          <option value="">All Categories</option>
-          <option value="Travel">Travel</option>
-          <option value="Finance">Finance</option>
-          <option value="Entertainment">Entertainment</option>
+          <option value="" style={{ color: "#AA98A9" }}>
+            All Categories
+          </option>
+          <option value="Travel" style={{ color: "#AA98A9" }}>
+            Travel
+          </option>
+          <option value="Finance" style={{ color: "#AA98A9" }}>
+            Finance
+          </option>
+          <option value="Entertainment" style={{ color: "#AA98A9" }}>
+            Entertainment
+          </option>
         </select>
       </div>
 
@@ -99,7 +134,20 @@ const AllBlogs = () => {
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="card card-compact bg-white shadow-lg border border-gray-200 rounded-xl hover:shadow-2xl transition-shadow duration-300"
+              className="card card-compact rounded-xl shadow-md p-0 flex flex-col"
+              style={{
+                backgroundColor: "#CBC3E3", // Light Purple card bg
+                border: "1.5px solid #AA98A9",
+                color: "#AA98A9",
+                transition: "box-shadow 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow =
+                  "0 8px 20px rgba(207, 159, 255, 0.6)"; // Light Violet glow on hover
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "none";
+              }}
             >
               <figure>
                 <img
@@ -108,30 +156,67 @@ const AllBlogs = () => {
                   className="w-full h-48 object-cover rounded-t-xl"
                 />
               </figure>
-              <div className="card-body flex flex-col">
-                <h2 className="card-title text-[#A53860] font-bold text-xl">
+              <div className="card-body flex flex-col flex-grow">
+                <h2
+                  className="card-title font-bold text-xl"
+                  style={{ color: "#AA98A9" }}
+                >
                   {blog.title}
                 </h2>
-                <p className="text-sm text-gray-500 mb-3">
+                <p className="text-sm mb-3" style={{ color: "#AA98A9" }}>
                   Category:{" "}
-                  <span className="font-semibold text-gray-700">
+                  <span style={{ fontWeight: "600", color: "#7B6799" }}>
                     {blog.category}
                   </span>
                 </p>
-                <p className="text-gray-700 flex-grow">{blog.shortDescription}</p>
+                <p className="flex-grow" style={{ color: "#7B6799" }}>
+                  {blog.shortDescription}
+                </p>
                 <div className="card-actions justify-between mt-6">
-                  <button
-                    className="btn btn-primary btn-sm bg-[#A53860] hover:bg-[#8b2e52] border-none transition"
-                    onClick={() => handleDetails(blog._id)}
-                  >
-                    Details
-                  </button>
-                  <button
-                    className="btn btn-outline btn-sm border-[#A53860] text-[#A53860] hover:bg-[#A53860] hover:text-white transition"
-                    onClick={() => handleWishlist(blog)}
-                  >
-                    Wishlist
-                  </button>
+                 
+
+<button
+  className="btn btn-primary btn-sm"
+  style={{
+    backgroundColor: "#7B6799", // Deep Purple bg
+    border: "none",
+    color: "white",
+    fontWeight: "600",
+    transition: "background-color 0.3s ease",
+  }}
+  onClick={() => handleDetails(blog._id)}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = "#9C86B1"; // lighter purple on hover
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "#7B6799";
+  }}
+>
+  Details
+</button>
+<button
+  className="btn btn-outline btn-sm"
+  style={{
+    borderColor: "#7B6799",
+    color: "#7B6799",
+    fontWeight: "600",
+    transition: "all 0.3s ease",
+  }}
+  onClick={() => handleWishlist(blog)}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = "#7B6799";
+    e.currentTarget.style.color = "white";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "transparent";
+    e.currentTarget.style.color = "#7B6799";
+  }}
+>
+  Wishlist
+</button>
+
+
+
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@ const features = [
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-10 w-10 text-white"
+        className="h-10 w-10 text-[#E6E6FA]" // Lavender for icon stroke
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -22,7 +22,7 @@ const features = [
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-10 w-10 text-white"
+        className="h-10 w-10 text-[#E6E6FA]" // Lavender
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -39,7 +39,7 @@ const features = [
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-10 w-10 text-white"
+        className="h-10 w-10 text-[#E6E6FA]" // Lavender
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -55,11 +55,19 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="my-20 px-6 md:px-12 max-w-5xl mx-auto bg-white rounded-xl shadow-lg py-12">
-      <h2 className="text-4xl font-extrabold mb-10 text-center text-[#A53860]">
+    <section className="my-20 px-6 md:px-12 max-w-5xl mx-auto rounded-xl shadow-lg py-12"
+      style={{ backgroundColor: "#E6E6FA" }} // Lavender background
+    >
+      <h2
+        className="text-4xl font-extrabold mb-10 text-center"
+        style={{ color: "#CF9FFF" }} // Light Violet for heading
+      >
         Why Choose Us?
       </h2>
-      <p className="text-gray-700 text-lg leading-relaxed text-center max-w-3xl mx-auto mb-12">
+      <p
+        className="text-lg leading-relaxed text-center max-w-3xl mx-auto mb-12"
+        style={{ color: "#5A2240" }} // darker text for contrast (you can choose #5A2240 or a purple shade)
+      >
         Join a vibrant community where your voice matters. Our platform offers:
       </p>
 
@@ -67,13 +75,24 @@ const WhyChooseUs = () => {
         {features.map(({ icon, title, desc }, idx) => (
           <div
             key={idx}
-            className="flex flex-col items-center bg-[#EF88AD] rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow cursor-pointer"
+            className="flex flex-col items-center rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow cursor-pointer"
+            style={{ backgroundColor: "#CBC3E3" }} // Light Purple cards background
           >
-            <div className="bg-[#A53860] rounded-full p-4 mb-6 flex items-center justify-center">
+            <div
+              className="rounded-full p-4 mb-6 flex items-center justify-center"
+              style={{ backgroundColor: "#CF9FFF" }} // Light Violet circle behind icon
+            >
               {icon}
             </div>
-            <h3 className="text-xl font-semibold text-[#5A2240] mb-2">{title}</h3>
-            <p className="text-[#5A2240] text-center">{desc}</p>
+            <h3
+              className="text-xl font-semibold mb-2"
+              style={{ color: "#5A2240" }} // text color dark purple for title
+            >
+              {title}
+            </h3>
+            <p className="text-center" style={{ color: "#5A2240" }}>
+              {desc}
+            </p>
           </div>
         ))}
       </div>

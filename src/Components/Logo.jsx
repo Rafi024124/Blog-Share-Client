@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import logo from '../assets/blog logo.png';
+import logo from '../assets/logo1.png';
 import { AuthContext } from '../providers/AuthProvider';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -15,21 +15,22 @@ const Logo = () => {
   };
 
   return (
-    <div className="w-full flex flex-col md:flex-row items-center justify-between px-4 py-3 gap-4 md:gap-0">
+    <div className="w-full ">
       
-      {/* Logo */}
+      <div className='max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between py-3 gap-4 md:gap-0'>
+          {/* Logo */}
       <div className="flex justify-center md:justify-start flex-1">
         <img
           src={logo}
           alt="logo"
           width={80}
-          className="rounded-full border-4 border-pink-500 shadow-md hover:scale-105 transition-transform duration-300"
+          className="rounded-full  hover:scale-105 transition-transform duration-300"
         />
       </div>
 
       {/* Title */}
       <div className="flex-1 text-center">
-        <h1 className="text-pink-500 text-3xl font-bold">BlogShare.</h1>
+        <h1 className="text-[#CF9FFF] text-3xl font-bold">BlogShare.</h1>
       </div>
 
       {/* Buttons or User Profile */}
@@ -40,7 +41,7 @@ const Logo = () => {
               <img
                 src={user.photoURL}
                 alt="User profile"
-                className="w-12 h-12 rounded-full border-2 border-[#A53860] shadow-md"
+                className="w-12 h-12 rounded-full border-2 border-[#AA98A9] shadow-md"
                 title={user.displayName}
               />
               <Link
@@ -49,11 +50,11 @@ const Logo = () => {
                 className="
                   group w-full md:w-[140px] px-4 py-2 
                   text-center flex items-center justify-center gap-2 
-                  bg-[#A53860] text-white text-base font-semibold 
+                  bg-[#CF9FFF] text-[#3B2E5B] text-base font-semibold 
                   shadow-md transition-all duration-300 
                   rounded-full 
-                  hover:bg-gradient-to-r hover:from-[#A53860] hover:to-[#EF88AD] 
-                  hover:shadow-lg
+                  hover:bg-gradient-to-r hover:from-[#CBC3E3] hover:to-[#E6E6FA] 
+                  hover:shadow-lg hover:shadow-purple-300
                 "
               >
                 Logout
@@ -69,11 +70,11 @@ const Logo = () => {
                 className="
                   group w-full md:w-[140px] px-4 py-2 
                   text-center flex items-center justify-center gap-2 
-                  bg-[#e16693] text-white text-base font-semibold 
+                  bg-[#CF9FFF] text-[#3B2E5B] text-base font-semibold 
                   shadow-md transition-all duration-300 
                   rounded-full 
-                  hover:bg-gradient-to-r hover:from-[#A53860] hover:to-[#EF88AD] 
-                  hover:shadow-lg
+                  hover:bg-gradient-to-r hover:from-[#CBC3E3] hover:to-[#E6E6FA] 
+                  hover:shadow-lg hover:shadow-purple-300
                 "
               >
                 Login
@@ -87,11 +88,11 @@ const Logo = () => {
                 className="
                   group w-full md:w-[140px] px-4 py-2 
                   text-center flex items-center justify-center gap-2 
-                  bg-[#e16693] text-white text-base font-semibold 
+                  bg-[#CF9FFF] text-[#3B2E5B] text-base font-semibold 
                   shadow-md transition-all duration-300 
                   rounded-full 
-                  hover:bg-gradient-to-r hover:from-[#A53860] hover:to-[#EF88AD] 
-                  hover:shadow-lg
+                  hover:bg-gradient-to-r hover:from-[#CBC3E3] hover:to-[#E6E6FA] 
+                  hover:shadow-lg hover:shadow-purple-300
                 "
               >
                 Register
@@ -102,6 +103,7 @@ const Logo = () => {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

@@ -30,14 +30,17 @@ const tipsData = [
 
 const TipsAndInsights = () => {
   return (
-    <section className="my-16 px-4 md:px-10 max-w-6xl mx-auto">
+    <section className="my-16 px-4 md:px-10 max-w-6xl mx-auto" style={{ backgroundColor: "#E6E6FA" }}>
       <h2
         className="text-4xl font-extrabold mb-12 text-center"
-        style={{ color: "#A53860" }}
+        style={{ color: "#CF9FFF" }}
       >
         Tips & Insights
       </h2>
-      <p className="text-gray-700 text-lg leading-relaxed text-center max-w-4xl mx-auto mb-12">
+      <p
+        className="text-lg leading-relaxed text-center max-w-4xl mx-auto mb-12"
+        style={{ color: "#5A2240" }}
+      >
         Unlock your blogging potential with expert writing tips, content ideas, and proven strategies
         to engage readers and grow your audience. Whether you’re a beginner or a seasoned blogger, 
         our insights help you craft compelling posts that spark conversation.
@@ -47,19 +50,21 @@ const TipsAndInsights = () => {
         {tipsData.map(({ icon, title, description }, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer"
-            style={{ borderTop: "4px solid #EF88AD" }}
+            className="rounded-lg shadow-md p-6 flex flex-col items-center text-center transition-transform transform hover:scale-105 hover:shadow-lg cursor-pointer"
+            style={{ backgroundColor: "#CBC3E3", borderTop: "4px solid #CF9FFF" }}
           >
             <div
               className="text-5xl mb-4"
               aria-label={`${title} icon`}
               role="img"
-              style={{ color: "#A53860" }}
+              style={{ color: "#CF9FFF" }}
             >
               {icon}
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-[#A53860]">{title}</h3>
-            <p className="text-gray-600">{description}</p>
+            <h3 className="text-xl font-semibold mb-2" style={{ color: "#5A2240" }}>
+              {title}
+            </h3>
+            <p className="text-[#5A2240]">{description}</p>
           </div>
         ))}
       </div>

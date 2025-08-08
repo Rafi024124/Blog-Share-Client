@@ -1,25 +1,10 @@
-// import React, { useContext } from 'react';
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from '../providers/AuthProvider';
 import BlogLoader from './BlogLoader';
-// import logo from "../assets/blog logo.png";
-// import { AuthContext } from '../providers/AuthProvider';
-
 
 const Navbar = () => {
-  //   const { user, signOutUser } = useContext(AuthContext);
-
-  //   const handleSignOut = () => {
-  //     signOutUser()
-  //       .then(() => {
-  //         console.log('user signed out successfully');
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   };
-  const {user, isLoading } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -27,52 +12,72 @@ const Navbar = () => {
   };
 
   const links = (
-    <>
-      <li>
-        <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
-          Home
-        </NavLink>
-      </li>
-      {user && 
-      <li>
-        <NavLink to="/addBlogs" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
-          Add Blog
-        </NavLink>
-      </li>}
-      <li>
-        <NavLink to="/allBlogs" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
-          All Blogs
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/featuredBlogs" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
-          Featured Blogs
-        </NavLink>
-      </li>
-      {user &&
-      <li>
-        <NavLink to="/myWishList" className={({ isActive }) => isActive ? "active-link" : "nav-link"}>
-          Wishlist
-        </NavLink>
-      </li>}
-    </>
-  );
+  <>
+    <li >
+      <NavLink
+        to="/"
+        style={{ color: '#483248' }}
+        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+      >
+        Home
+      </NavLink>
+    </li>
+    {user && 
+    <li>
+      <NavLink
+        to="/addBlogs"
+        style={{ color: '#483248' }}
+        className={({ isActive }) => isActive ? "active-link " : "nav-link"}
+      >
+        Add Blog
+      </NavLink>
+    </li>}
+    <li>
+      <NavLink
+        to="/allBlogs"
+        style={{ color: '#483248' }}
+        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+      >
+        All Blogs
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        to="/featuredBlogs"
+        style={{ color: '#483248' }}
+        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+      >
+        Featured Blogs
+      </NavLink>
+    </li>
+    {user &&
+    <li>
+      <NavLink
+        to="/myWishList"
+        style={{ color: '#483248' }}
+        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+      >
+        Wishlist
+      </NavLink>
+    </li>}
+  </>
+);
 
- if(isLoading){
-    return <BlogLoader></BlogLoader>
- }
 
+  if (isLoading) {
+    return <BlogLoader />;
+  }
 
   return (
     <div
-      className="navbar shadow-sm"
+      className="navbar shadow-sm sticky top-0 z-50"
       style={{
-        background: 'linear-gradient(to right, #EF88AD, #A53860, white)'
+        background: 'linear-gradient(to right, #E6E6FA, #CBC3E3, #CF9FFF)', // Lavender to Light Purple to Light Violet
       }}
     >
       {/* Large screens */}
       <div className="hidden lg:flex md:flex justify-center items-center w-full">
-        <ul className="menu menu-horizontal px-1 gap-8 text-white">
+        <ul className="menu menu-horizontal px-1 gap-8" style={{ color: '#AA98A9' }}>
           {links}
         </ul>
       </div>
@@ -81,7 +86,9 @@ const Navbar = () => {
       <div className="flex lg:hidden md:hidden justify-center items-center w-full relative">
         <button
           onClick={handleMenuToggle}
-          className="text-white focus:outline-none"
+          className="focus:outline-none"
+          style={{ color: "#AA98A9" }} // text color for hamburger icon
+          aria-label="Toggle menu"
         >
           {/* Hamburger Icon */}
           <svg
@@ -110,10 +117,13 @@ const Navbar = () => {
         </button>
 
         {isMenuOpen && (
-          <div className="absolute top-full mt-2 bg-[#A53860] rounded-md shadow-lg w-11/12 max-w-xs z-50 p-4">
-            <ul className="grid grid-cols-2 gap-3 text-white">
-  {links}
-</ul>
+          <div
+            className="absolute top-full mt-2 rounded-md shadow-lg w-11/12 max-w-xs z-50 p-4"
+            style={{ backgroundColor: "#CBC3E3" }} // Light Purple background
+          >
+            <ul className="grid grid-cols-2 gap-3" style={{ color: '#AA98A9' }}>
+              {links}
+            </ul>
           </div>
         )}
       </div>

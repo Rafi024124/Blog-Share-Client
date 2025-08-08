@@ -4,9 +4,9 @@ const BlogLoader = () => {
   return (
     <div style={styles.loaderContainer}>
       <div style={styles.loader}>
-        <span style={styles.dot}></span>
-        <span style={{ ...styles.dot, animationDelay: "0.2s" }}></span>
-        <span style={{ ...styles.dot, animationDelay: "0.4s" }}></span>
+        <span style={{ ...styles.dot, backgroundColor: "#E6E6FA", animationDelay: "0s" }}></span>      {/* Lavender */}
+        <span style={{ ...styles.dot, backgroundColor: "#CBC3E3", animationDelay: "0.2s" }}></span>   {/* Light Purple */}
+        <span style={{ ...styles.dot, backgroundColor: "#CF9FFF", animationDelay: "0.4s" }}></span>   {/* Light Violet */}
       </div>
       <p style={styles.text}>Loading articles...</p>
       <style>{`
@@ -26,7 +26,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     height: "150px",
-    color: "#555",
+    color: "#5A2240",  // dark purple text
     fontFamily: "'Georgia', serif",
   },
   loader: {
@@ -38,7 +38,6 @@ const styles = {
     width: "15px",
     height: "15px",
     borderRadius: "50%",
-    backgroundColor: "#6b46c1", // classy purple shade
     animationName: "blink",
     animationDuration: "1.4s",
     animationIterationCount: "infinite",

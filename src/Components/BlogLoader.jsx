@@ -26,7 +26,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     height: "150px",
-    color: "#5A2240",  // dark purple text
+    color: "#9370DB",  // dark purple text
     fontFamily: "'Georgia', serif",
   },
   loader: {

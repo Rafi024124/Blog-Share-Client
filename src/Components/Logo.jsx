@@ -15,7 +15,7 @@ const Logo = () => {
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full bg-[#1C1C1C]">
       
       <div className='max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between py-3 gap-4 md:gap-0'>
           {/* Logo */}

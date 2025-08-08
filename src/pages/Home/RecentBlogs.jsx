@@ -69,7 +69,7 @@ const RecentBlogs = ({ blogs }) => {
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-4 md:px-10 py-10">
+    <section className="max-w-7xl mx-auto px-4 md:px-10 py-10 bg-[#1C1C1C]">
       <h2
         className="text-4xl font-extrabold mb-10 text-center"
         style={{ color: "#6B5876" }}
@@ -96,11 +96,13 @@ const RecentBlogs = ({ blogs }) => {
             </figure>
             <div className="card-body">
               <h3
-                className="card-title text-2xl font-semibold mb-2"
+                className="card-title text-2xl font-semibold mb-2 truncate"
                 style={{ color: "#6B5876" }}
+                title={blog.title} 
               >
                 {blog.title}
               </h3>
+
               <p
                 className="text-sm font-medium mb-3"
                 style={{ color: "#6B5876" }}
@@ -138,29 +140,28 @@ const RecentBlogs = ({ blogs }) => {
                   Details
                 </button>
                 <button
-  className="btn btn-sm"
-  style={{
-    backgroundColor: "transparent",   // transparent initially
-    borderColor: "#CF9FFF",
-    color: "#CF9FFF",                  // text color light violet initially
-    fontWeight: "600",
-    transition: "all 0.3s ease",
-  }}
-  onClick={() => handleWishlist(blog)}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.backgroundColor = "#CF9FFF"; // fill on hover
-    e.currentTarget.style.color = "#3B2E5B";           // dark purple text on hover
-    e.currentTarget.style.boxShadow = "0 0 8px #B47DDD";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.backgroundColor = "transparent"; // back to transparent
-    e.currentTarget.style.color = "#CF9FFF";                // light violet text
-    e.currentTarget.style.boxShadow = "none";
-  }}
->
-  Wishlist
-</button>
-
+                  className="btn btn-sm"
+                  style={{
+                    backgroundColor: "transparent", // transparent initially
+                    borderColor: "#CF9FFF",
+                    color: "#CF9FFF", // text color light violet initially
+                    fontWeight: "600",
+                    transition: "all 0.3s ease",
+                  }}
+                  onClick={() => handleWishlist(blog)}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#CF9FFF"; // fill on hover
+                    e.currentTarget.style.color = "#3B2E5B"; // dark purple text on hover
+                    e.currentTarget.style.boxShadow = "0 0 8px #B47DDD";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent"; // back to transparent
+                    e.currentTarget.style.color = "#CF9FFF"; // light violet text
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  Wishlist
+                </button>
               </div>
             </div>
           </div>

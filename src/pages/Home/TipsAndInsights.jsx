@@ -30,7 +30,7 @@ const tipsData = [
 
 const TipsAndInsights = () => {
   return (
-    <section className="my-16 px-4 md:px-10 max-w-6xl mx-auto" style={{ backgroundColor: "#E6E6FA" }}>
+    <section className="my-16 p-4 md:p-12 max-w-7xl mx-auto rounded-3xl" style={{ backgroundColor: "#E6E6FA" }}>
       <h2
         className="text-4xl font-extrabold mb-12 text-center"
         style={{ color: "#CF9FFF" }}

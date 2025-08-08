@@ -39,7 +39,7 @@ const AllBlogs = () => {
   };
 
   const handleWishlist = (blog) => {
-    const { _id,  ...rest } = blog;
+    const { _id, ...rest } = blog;
     const wishList = {
       userEmail: user?.email,
       blogId: _id,
@@ -52,7 +52,6 @@ const AllBlogs = () => {
       })
       .then((res) => {
         if (res.data.insertedId) {
-          
           Swal.fire({
             title: "Added to wishlist!",
             icon: "success",
@@ -60,7 +59,6 @@ const AllBlogs = () => {
             showConfirmButton: false,
           });
           console.log(res.data);
-          
         }
       })
       .catch((error) => {
@@ -79,7 +77,10 @@ const AllBlogs = () => {
   };
 
   return (
-    <div className="min-h-screen py-14 px-6 md:px-12" style={{ backgroundColor: "#fff" }}>
+    <div
+      className="min-h-screen py-14 px-6 md:px-12"
+      style={{ backgroundColor: "#1C1C1C" }}
+    >
       <h2
         className="text-4xl font-extrabold text-center mb-12 tracking-tight"
         style={{ color: "#AA98A9" }}
@@ -156,67 +157,81 @@ const AllBlogs = () => {
                   className="w-full h-48 object-cover rounded-t-xl"
                 />
               </figure>
-              <div className="card-body flex flex-col flex-grow">
+              <div className="card-body flex flex-col ">
                 <h2
-                  className="card-title font-bold text-xl"
-                  style={{ color: "#AA98A9" }}
+                  className="card-title font-bold text-xl truncate text-center text-[#737373]"
+                  style={{
+                   
+                    whiteSpace: "nowrap", // Stay on one line
+                    overflow: "hidden", // Hide overflow
+                    textOverflow: "ellipsis", // Add ...
+                    display: "block", // Make sure it's a block-level element
+                    maxWidth: "290px", // Set a fixed width for ellipsis to work
+                  }}
                 >
                   {blog.title}
                 </h2>
-                <p className="text-sm mb-3" style={{ color: "#AA98A9" }}>
+                <p className="text-sm mb-3 text-[#737373]" >
                   Category:{" "}
-                  <span style={{ fontWeight: "600", color: "#7B6799" }}>
+                  <span
+                    className="rounded-2xl bg-purple-300 border-2 border-purple-600 text-[#AA98A9] p-1"
+                    style={{ fontWeight: "600", color: "#7B6799" }}
+                  >
                     {blog.category}
                   </span>
                 </p>
-                <p className="flex-grow" style={{ color: "#7B6799" }}>
+                <p
+                  className="flex-grow text-center max-w-[290px] truncate"
+                  style={{
+                    color: "#7B6799",
+
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
                   {blog.shortDescription}
                 </p>
                 <div className="card-actions justify-between mt-6">
-                 
-
-<button
-  className="btn btn-primary btn-sm"
-  style={{
-    backgroundColor: "#7B6799", // Deep Purple bg
-    border: "none",
-    color: "white",
-    fontWeight: "600",
-    transition: "background-color 0.3s ease",
-  }}
-  onClick={() => handleDetails(blog._id)}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.backgroundColor = "#9C86B1"; // lighter purple on hover
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.backgroundColor = "#7B6799";
-  }}
->
-  Details
-</button>
-<button
-  className="btn btn-outline btn-sm"
-  style={{
-    borderColor: "#7B6799",
-    color: "#7B6799",
-    fontWeight: "600",
-    transition: "all 0.3s ease",
-  }}
-  onClick={() => handleWishlist(blog)}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.backgroundColor = "#7B6799";
-    e.currentTarget.style.color = "white";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.backgroundColor = "transparent";
-    e.currentTarget.style.color = "#7B6799";
-  }}
->
-  Wishlist
-</button>
-
-
-
+                  <button
+                    className="btn btn-primary btn-sm"
+                    style={{
+                      backgroundColor: "#7B6799", // Deep Purple bg
+                      border: "none",
+                      color: "white",
+                      fontWeight: "600",
+                      transition: "background-color 0.3s ease",
+                    }}
+                    onClick={() => handleDetails(blog._id)}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#9C86B1"; // lighter purple on hover
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "#7B6799";
+                    }}
+                  >
+                    Details
+                  </button>
+                  <button
+                    className="btn btn-outline btn-sm"
+                    style={{
+                      borderColor: "#7B6799",
+                      color: "#7B6799",
+                      fontWeight: "600",
+                      transition: "all 0.3s ease",
+                    }}
+                    onClick={() => handleWishlist(blog)}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#7B6799";
+                      e.currentTarget.style.color = "white";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.color = "#7B6799";
+                    }}
+                  >
+                    Wishlist
+                  </button>
                 </div>
               </div>
             </div>

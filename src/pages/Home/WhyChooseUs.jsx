@@ -55,8 +55,8 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="my-20 px-6 md:px-12 max-w-5xl mx-auto rounded-xl shadow-lg py-12"
-      style={{ backgroundColor: "#E6E6FA" }} // Lavender background
+    <section className="my-20 px-6 md:px-12 max-w-7xl mx-auto rounded-xl shadow-lg py-12"
+      style={{ backgroundColor: "#E6E6FA" }} 
     >
       <h2
         className="text-4xl font-extrabold mb-10 text-center"

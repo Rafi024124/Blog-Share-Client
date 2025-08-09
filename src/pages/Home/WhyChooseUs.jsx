@@ -55,47 +55,65 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="my-20 px-6 md:px-12 max-w-7xl mx-auto rounded-xl shadow-lg py-12"
-      style={{ backgroundColor: "#E6E6FA" }} 
+    <section className="px-3">
+      <section
+      className="my-20 px-6 md:px-12 max-w-7xl mx-auto rounded-3xl py-16 shadow-xl"
+      style={{
+        background: "linear-gradient(135deg, #CBC3E3 0%, #AA98A9 100%)",
+        color: "#4B4453",
+      }}
     >
       <h2
-        className="text-4xl font-extrabold mb-10 text-center"
-        style={{ color: "#CF9FFF" }} // Light Violet for heading
+        className="text-4xl font-extrabold mb-12 text-center tracking-wide"
+        style={{ color: "#5F4D7A", letterSpacing: "0.07em", textShadow: "0 0 5px #8B74A4" }}
       >
         Why Choose Us?
       </h2>
       <p
-        className="text-lg leading-relaxed text-center max-w-3xl mx-auto mb-12"
-        style={{ color: "#5A2240" }} // darker text for contrast (you can choose #5A2240 or a purple shade)
+        className="text-lg leading-relaxed text-center max-w-3xl mx-auto mb-16"
+        style={{ color: "#4B3F69", fontWeight: "600", letterSpacing: "0.02em" }}
       >
         Join a vibrant community where your voice matters. Our platform offers:
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 max-w-4xl mx-auto">
         {features.map(({ icon, title, desc }, idx) => (
           <div
             key={idx}
-            className="flex flex-col items-center rounded-xl p-8 shadow-md hover:shadow-xl transition-shadow cursor-pointer"
-            style={{ backgroundColor: "#CBC3E3" }} // Light Purple cards background
+            className="flex flex-col items-center rounded-2xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer bg-white/80 backdrop-blur-sm border border-purple-200"
+            style={{
+              color: "#5A2240",
+              boxShadow:
+                "0 4px 12px rgba(123, 103, 153, 0.3), inset 0 0 8px rgba(187, 175, 205, 0.25)",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-6px)";
+              e.currentTarget.style.boxShadow =
+                "0 10px 25px rgba(123, 103, 153, 0.7), inset 0 0 12px rgba(187, 175, 205, 0.5)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 4px 12px rgba(123, 103, 153, 0.3), inset 0 0 8px rgba(187, 175, 205, 0.25)";
+            }}
           >
             <div
-              className="rounded-full p-4 mb-6 flex items-center justify-center"
-              style={{ backgroundColor: "#CF9FFF" }} // Light Violet circle behind icon
+              className="rounded-full p-4 mb-6 flex items-center justify-center shadow-md"
+              style={{
+                background:
+                  "linear-gradient(135deg, #AA98A9 0%, #CF9FFF 100%)",
+                boxShadow: "0 0 10px rgba(203,195,227,0.7)",
+              }}
             >
               {icon}
             </div>
-            <h3
-              className="text-xl font-semibold mb-2"
-              style={{ color: "#5A2240" }} // text color dark purple for title
-            >
-              {title}
-            </h3>
-            <p className="text-center" style={{ color: "#5A2240" }}>
-              {desc}
-            </p>
+            <h3 className="text-xl font-semibold mb-2 tracking-wide">{title}</h3>
+            <p className="text-center text-sm leading-relaxed">{desc}</p>
           </div>
         ))}
       </div>
+    </section>
     </section>
   );
 };

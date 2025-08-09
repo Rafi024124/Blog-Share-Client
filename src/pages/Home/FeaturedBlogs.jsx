@@ -75,9 +75,9 @@ const FeaturedBlogs = () => {
   };
 
   return (
-    <section className="py-14 px-6 md:px-12  rounded-3xl max-w-7xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-4xl font-extrabold text-[#7B6799]">
+    <section className="py-14 px-4  rounded-3xl max-w-7xl mx-auto">
+      <div className="flex flex-col gap-3 justify-between items-center mb-8">
+        <h2 className="text-4xl font-extrabold text-[#A78BFAFF] text-center]">
           Featured Blogs
         </h2>
         <button
@@ -103,7 +103,7 @@ const FeaturedBlogs = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {sortedBlogs.map((blog) => (
           <FeaturedBlogCard
             key={blog._id}

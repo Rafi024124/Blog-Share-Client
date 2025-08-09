@@ -82,8 +82,10 @@ const Navbar = () => {
   return (
     <div
       className="navbar shadow-sm sticky top-0 z-50"
-      style={{
-        background: 'linear-gradient(to right, #E6E6FA, #CBC3E3, #CF9FFF)', // Lavender to Light Purple to Light Violet
+     style={{
+        background:
+          "linear-gradient(135deg, rgba(203,195,227,0.99), rgba(170,152,169,0.85))",
+        border: "1.5px solid rgba(170, 152, 169, 0.5)",
       }}
     >
       {/* Large screens */}

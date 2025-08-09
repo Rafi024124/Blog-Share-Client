@@ -59,7 +59,7 @@ const AddBlogs = () => {
                 <input
                   name="title"
                   type="text"
-                  className="input input-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-purple-500"
+                  className="input input-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-[#AA98A9]"
                   placeholder="Amazing Blog Title"
                   required
                 />
@@ -73,7 +73,7 @@ const AddBlogs = () => {
                 <input
                   name="image"
                   type="url"
-                  className="input input-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-purple-500"
+                  className="input input-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-[#AA98A9]"
                   placeholder="https://example.com/image.jpg"
                   required
                   onChange={(e) => setImageURL(e.target.value)}
@@ -98,7 +98,7 @@ const AddBlogs = () => {
               </label>
               <select
                 name="category"
-                className="select select-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-purple-500"
+                className="select select-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-[#AA98A9]"
                 required
               >
                 <option value="">Select a category</option>
@@ -121,7 +121,7 @@ const AddBlogs = () => {
               </label>
               <textarea
                 name="shortDescription"
-                className="textarea textarea-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-purple-500"
+                className="textarea textarea-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-[#AA98A9]"
                 placeholder="Write a short summary of your blog"
                 required
                 style={{ height: "100px" }}
@@ -136,7 +136,7 @@ const AddBlogs = () => {
               </label>
               <textarea
                 name="longDescription"
-                className="textarea textarea-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-purple-500"
+                className="textarea textarea-bordered w-full bg-[#3B3655] text-white border-none focus:ring-2 focus:ring-[#AA98A9]"
                 placeholder="Write your full blog content here..."
                 required
                 style={{ height: "180px" }}

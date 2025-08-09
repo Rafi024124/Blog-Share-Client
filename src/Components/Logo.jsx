@@ -17,7 +17,7 @@ const Logo = () => {
   return (
     <div className="w-full bg-[#1C1C1C]">
       
-      <div className='max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between py-3 gap-4 md:gap-0'>
+      <div className='max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-3 gap-4 md:gap-0'>
           {/* Logo */}
       <div className="flex justify-center md:justify-start flex-1">
         <img
@@ -30,7 +30,7 @@ const Logo = () => {
 
       {/* Title */}
       <div className="flex-1 text-center">
-        <h1 className="text-[#CF9FFF] text-3xl font-bold">BlogShare.</h1>
+        <h1 className="text-[#A78BFAFF] text-3xl font-bold">BlogShare.</h1>
       </div>
 
       {/* Buttons or User Profile */}

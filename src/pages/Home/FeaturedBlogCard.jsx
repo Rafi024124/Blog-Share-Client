@@ -44,7 +44,7 @@ const FeaturedBlogCard = ({ blog, onDetailsClick, onWishlistClick }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             display: "block",
-            maxWidth: "290px",
+            maxWidth: "230px",
             margin: "0 auto",
           }}
           title={blog.title}
@@ -53,7 +53,7 @@ const FeaturedBlogCard = ({ blog, onDetailsClick, onWishlistClick }) => {
         </h2>
 
         <p
-          className="flex-grow text-center text-sm max-w-[290px] truncate mt-2"
+          className="flex-grow text-center text-sm max-w-[230px] truncate mt-2"
           style={{
             color: "#5E4B7B",
             whiteSpace: "nowrap",

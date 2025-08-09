@@ -66,18 +66,18 @@ const RecentBlogs = ({ blogs }) => {
 
   if (!blogs || blogs.length === 0) {
     return (
-      <p className="text-center text-gray-500 mt-10">No recent blogs found.</p>
+      <p className="text-center text-[#A78BFAFF] mt-10">No recent blogs found.</p>
     );
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-4 md:px-10 py-10 bg-[#1C1C1C] rounded-3xl">
+    <section className="max-w-7xl mx-auto px-4  py-10 bg-[#1C1C1C] rounded-3xl">
       <h2
-        className="text-4xl font-extrabold mb-10 text-center text-[#6B5876]"
+        className="text-4xl font-extrabold mb-10 text-center text-[#A78BFAFF]"
       >
         Recent Blogs
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {blogs.slice(0, 6).map((blog) => (
           <FeaturedBlogCard
             key={blog._id}

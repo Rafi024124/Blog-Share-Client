@@ -94,8 +94,8 @@ const AllBlogs = () => {
       style={{ backgroundColor: "#1C1C1C" }}
     >
       <h2
-        className="text-4xl font-extrabold text-center mb-12 tracking-tight"
-        style={{ color: "#AA98A9" }}
+        className="text-4xl font-extrabold text-center mb-12 tracking-tight text-[#A78BFA]"
+       
       >
         All Blogs
       </h2>
@@ -188,7 +188,7 @@ const AllBlogs = () => {
       {blogs.length === 0 ? (
         <p className="text-center text-gray-400 text-lg mt-14">No blogs found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-6xl mx-auto">
           {blogs.map((blog) => (
             <div
               key={blog._id}
@@ -232,7 +232,7 @@ const AllBlogs = () => {
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     display: "block",
-                    maxWidth: "290px",
+                    maxWidth: "230px",
                     margin: "0 auto",
                   }}
                 >
@@ -240,7 +240,7 @@ const AllBlogs = () => {
                 </h2>
 
                 <p
-                  className="flex-grow text-center text-sm max-w-[290px] truncate mt-2"
+                  className="flex-grow text-center text-sm max-w-[230px] truncate mt-2"
                   style={{
                     color: "#5E4B7B",
                     whiteSpace: "nowrap",

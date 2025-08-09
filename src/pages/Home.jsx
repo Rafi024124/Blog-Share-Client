@@ -5,6 +5,7 @@ import Newsletter from '../pages/Home/Newsletter'; // your newsletter section co
 import TipsAndInsights from "./Home/TipsAndInsights";
 import WhyChooseUs from "./Home/WhyChooseUs";
 import BlogLoader from "../Components/BlogLoader";
+import FeaturedBlogs from "./Home/FeaturedBlogs";
 //import Header from '../Components/Header';  // your navbar/header component
 //import Footer from '../Components/Footer';  // footer component
 
@@ -37,6 +38,7 @@ const Home = () => {
       )}
 
       {/* Add your two extra custom sections here */}
+      <FeaturedBlogs></FeaturedBlogs>
 
 <TipsAndInsights></TipsAndInsights>
 

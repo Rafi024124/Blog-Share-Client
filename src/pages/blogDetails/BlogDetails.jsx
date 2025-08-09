@@ -32,46 +32,44 @@ const BlogDetails = () => {
     e.preventDefault();
 
     const commentData = {
-      text: comment,
+      text: comment.trim(),
       blogId: _id,
       author: user.displayName,
       author_email: user.email,
       photo: user.photoURL,
+      createdAt: new Date().toISOString(),
     };
 
     fetch(`http://localhost:3000/comments`, {
       method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify(commentData),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
           Swal.fire({
-            title: 'Comment added successfully!',
+            title: 'Comment added!',
             icon: 'success',
-            timer: 1500,
+            timer: 1400,
             showConfirmButton: false,
+            background: '#1e293b',
+            color: '#f8fafc',
+            iconColor: '#A53860',
           });
 
-          const newComment = {
-            _id: data.insertedId,
-            ...commentData,
-          };
-
-          setComments([...comments, newComment]);
+          const newComment = { _id: data.insertedId, ...commentData };
+          setComments((prev) => [...prev, newComment]);
           setComment('');
         }
       });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6 md:px-12 max-w-5xl mx-auto rounded-3xl flex flex-col items-center">
+    <div className="min-h-screen bg-[#1C1C1C] px-6 py-12 max-w-7xl mx-auto rounded-3xl flex flex-col space-y-10 text-gray-200 font-sans">
       <button
         onClick={() => navigate('/allBlogs')}
-        className="self-start mb-8 px-5 py-2 rounded-lg shadow-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-300"
+        className="self-start px-6 py-2 rounded-lg bg-[#bc88f1] hover:bg-[#8b2e52] font-semibold shadow-lg transition-colors duration-300"
       >
         ← Back
       </button>
@@ -79,88 +77,131 @@ const BlogDetails = () => {
       {user?.email === email && (
         <button
           onClick={() => navigate(`/updateBlog/${_id}`)}
-          className="mb-4 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow"
+          className="self-start px-8 py-3 rounded-lg bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold shadow-md transition duration-300"
         >
           ✏️ Update Blog
         </button>
       )}
 
-      <div className="w-full bg-white rounded-3xl p-10 border border-gray-200 shadow-lg">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-72 md:h-96 object-cover rounded-2xl mb-8"
-        />
-
-        <h1 className="text-5xl font-extrabold text-center text-[#A53860] mb-8">
-          {title}
-        </h1>
-
-        <div className="space-y-6 text-gray-800 text-lg">
-          <p>
-            <span className="font-semibold">📂 Category:</span> {category}
-          </p>
-          <p>
-            <span className="font-semibold">📝 Short Description:</span> {shortDescription}
-          </p>
-          <p>
-            <span className="font-semibold">📖 Full Blog:</span> {longDescription}
-          </p>
-          <p className="text-sm text-gray-600 italic">
-            ✍️ Written by <span className="font-semibold text-[#A53860]">{author}</span> ({email})
-          </p>
+      {/* Main container */}
+      <div 
+       style={{
+        background: "linear-gradient(135deg, rgba(203,195,227,0.99), rgba(170,152,169,0.85))", // soft purple gradient
+        border: "1.5px solid rgba(170, 152, 169, 0.5)",
+      }}
+      className="flex flex-col md:flex-row gap-12 bg-gray-900 bg-opacity-70 rounded-3xl p-10 shadow-2xl border border-gray-700">
+        {/* Left: Image */}
+        <div className="md:w-1/2 rounded-2xl overflow-hidden shadow-xl border-4 border-[#A53860]">
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
         </div>
 
-        {/* Comment Section */}
+        {/* Right: Info */}
+        <div className="md:w-1/2 flex flex-col justify-center space-y-8 px-4">
+          <h1 className="text-5xl font-extrabold tracking-tight text-[#4B4453] drop-shadow-lg">
+            {title}
+          </h1>
+
+          <p className="text-lg bg-[#4B4453] bg-clip-text text-transparent font-semibold">
+            📂 {category}
+          </p>
+
+          <p className="text-[#4B4453] text-lg leading-relaxed border-l-4 border-[#350843] pl-4 italic drop-shadow-sm">
+            {shortDescription}
+          </p>
+
+          <p className="text-[#4B4453] whitespace-pre-line leading-relaxed tracking-wide text-lg">
+            {longDescription}
+          </p>
+
+          <p className="mt-8 text-sm italic text-[#4B4453] flex items-center gap-2">
+            ✍️ Written by{' '}
+            <span className="font-semibold text-[#4B4453]">{author}</span> ({email})
+          </p>
+        </div>
+      </div>
+
+      {/* Comment Section */}
+      <section className="w-full bg-gray-900 bg-opacity-70 rounded-3xl p-8 shadow-2xl border border-gray-700">
+        <h3 className="text-4xl font-bold mb-8 text-[#F0A5B0] tracking-wider border-b border-[#A53860] pb-3">
+          🐨 Comments ({comments.length})
+        </h3>
+
         {user?.email === email ? (
-          <p className="mt-12 text-center text-red-600 font-semibold">
+          <p className="mb-8 text-center text-red-500 font-semibold">
             You cannot comment on your own blog.
           </p>
         ) : (
-          <form onSubmit={handleCommentSubmit} className="mt-12 space-y-4">
-            <label htmlFor="comment" className="block font-semibold text-2xl mb-2">
-              💬 Leave a Comment
-            </label>
+          <form onSubmit={handleCommentSubmit} className="mb-10 flex flex-col space-y-4">
             <textarea
-              id="comment"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className="textarea textarea-bordered w-full h-28 rounded-lg border-gray-300 focus:border-[#A53860] focus:ring-2 focus:ring-[#A53860]"
+              className="resize-none rounded-xl bg-gray-800 border border-gray-700 text-gray-200 p-5 shadow-inner
+                         focus:outline-none focus:ring-4 focus:ring-[#A53860] focus:border-[#A53860] transition duration-300
+                         placeholder-gray-500 min-h-[100px]"
               placeholder="Write your comment here..."
               required
             />
             <button
               type="submit"
-              className="btn btn-success w-full bg-[#A53860] hover:bg-[#8b2e52] text-white rounded-lg py-3"
+              disabled={!comment.trim()}
+              className={`self-end rounded-xl px-8 py-3 font-semibold shadow-lg transition
+                ${
+                  comment.trim()
+                    ? 'bg-gradient-to-r from-[#A53860] to-[#8b2e52] hover:brightness-110'
+                    : 'bg-gray-700 cursor-not-allowed opacity-60'
+                } text-gray-100`}
             >
               Submit Comment
             </button>
           </form>
         )}
 
-        {comments.length > 0 && (
-          <section className="mt-14">
-            <h3 className="text-3xl font-bold mb-6 border-b pb-2">
-              🐨 Comments ({comments.length})
-            </h3>
-            <ul className="space-y-6 max-h-96 overflow-y-auto pr-4">
-              {comments.map((c, idx) => (
-                <li key={c._id || idx} className="bg-gray-100 rounded-xl p-5 shadow-sm flex gap-4">
-                  <img
-                    src={c.photo || 'https://via.placeholder.com/48?text=User'}
-                    alt="user"
-                    className="rounded-full w-12 h-12 object-cover border-2 border-[#A53860]"
-                  />
-                  <div>
-                    <p className="font-semibold text-[#A53860]">{c.author}</p>
-                    <p className="text-gray-700">{c.text}</p>
+        <ul className="space-y-6 max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#A53860]/60 scrollbar-track-gray-800">
+          {comments.length ? (
+            comments.map((c, idx) => (
+              <li
+                key={c._id || idx}
+                className="flex space-x-5 bg-gradient-to-tr from-gray-800 to-gray-900 rounded-2xl p-5 shadow-lg
+                  border border-[#A53860] hover:shadow-[#A53860]/70 transition-shadow duration-300"
+              >
+                <img
+                  src={c.photo || 'https://via.placeholder.com/48?text=User'}
+                  alt={c.author}
+                  className="w-14 h-14 rounded-full object-cover border-2 border-[#A53860]"
+                  loading="lazy"
+                />
+                <div className="flex-1">
+                  <div className="flex justify-between items-center">
+                    <p className="font-semibold text-[#F0A5B0] text-lg tracking-wide">
+                      {c.author}
+                    </p>
+                    <time
+                      className="text-xs text-gray-400 font-mono"
+                      title={new Date(c.createdAt).toLocaleString()}
+                    >
+                      {new Date(c.createdAt).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </time>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </div>
+                  <p className="mt-2 text-gray-300 leading-relaxed whitespace-pre-line">
+                    {c.text}
+                  </p>
+                </div>
+              </li>
+            ))
+          ) : (
+            <p className="text-center text-gray-500 mt-20 select-none">No comments yet. Be the first to comment!</p>
+          )}
+        </ul>
+      </section>
     </div>
   );
 };

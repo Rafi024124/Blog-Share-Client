@@ -6,12 +6,14 @@ import {
   flexRender,
   createColumnHelper,
 } from "@tanstack/react-table";
+import { useNavigate } from "react-router-dom";
 
 const columnHelper = createColumnHelper();
 
 const FeaturedBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [sorting, setSorting] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:3000/blogs")
@@ -28,6 +30,10 @@ const FeaturedBlogs = () => {
       });
   }, []);
 
+  const handleDetails = (id) => {
+    navigate(`/blogDetails/${id}`);
+  };
+
   const data = useMemo(() => blogs, [blogs]);
 
   const columns = useMemo(
@@ -40,7 +46,15 @@ const FeaturedBlogs = () => {
       }),
       columnHelper.accessor("title", {
         header: "Title",
-        cell: (info) => info.getValue(),
+        cell: ({ row, getValue }) => (
+          <span
+            onClick={() => handleDetails(row.original._id)}
+            className="text-[#4B4B80] hover:underline cursor-pointer font-semibold"
+            title="View Blog Details"
+          >
+            {getValue()}
+          </span>
+        ),
         enableSorting: true,
       }),
       columnHelper.accessor("author", {
@@ -114,7 +128,10 @@ const FeaturedBlogs = () => {
                       onClick={header.column.getToggleSortingHandler()}
                       style={{ userSelect: "none", fontWeight: "600" }}
                     >
-                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                       {isSorted === "asc" && " 🔼"}
                       {isSorted === "desc" && " 🔽"}
                     </th>

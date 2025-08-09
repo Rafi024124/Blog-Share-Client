@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const links = (
   <>
-    <li >
+    <li>
       <NavLink
         to="/"
         style={{ color: '#483248' }}
@@ -22,16 +22,37 @@ const Navbar = () => {
         Home
       </NavLink>
     </li>
-    {user && 
-    <li>
-      <NavLink
-        to="/addBlogs"
-        style={{ color: '#483248' }}
-        className={({ isActive }) => isActive ? "active-link " : "nav-link"}
-      >
-        Add Blog
-      </NavLink>
-    </li>}
+    {user && (
+      <>
+        <li>
+          <NavLink
+            to="/addBlogs"
+            style={{ color: '#483248' }}
+            className={({ isActive }) => isActive ? "active-link " : "nav-link"}
+          >
+            Add Blog
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/myBlogs"
+            style={{ color: '#483248' }}
+            className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+          >
+            My Blogs
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/myWishList"
+            style={{ color: '#483248' }}
+            className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+          >
+            Wishlist
+          </NavLink>
+        </li>
+      </>
+    )}
     <li>
       <NavLink
         to="/allBlogs"
@@ -50,16 +71,6 @@ const Navbar = () => {
         Featured Blogs
       </NavLink>
     </li>
-    {user &&
-    <li>
-      <NavLink
-        to="/myWishList"
-        style={{ color: '#483248' }}
-        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
-      >
-        Wishlist
-      </NavLink>
-    </li>}
   </>
 );
 

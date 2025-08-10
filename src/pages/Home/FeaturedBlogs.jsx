@@ -12,7 +12,7 @@ const FeaturedBlogs = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:3000/blogs")
+    fetch("https://blog-share-server.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);
@@ -26,7 +26,7 @@ const FeaturedBlogs = () => {
         const bCount = b.longDescription?.split(/\s+/).length || 0;
         return sortAsc ? aCount - bCount : bCount - aCount;
       })
-      .slice(0, 6);
+      .slice(0, 8);
   }, [blogs, sortAsc]);
 
   const handleDetails = (id) => {
@@ -46,7 +46,7 @@ const FeaturedBlogs = () => {
     };
 
     axios
-      .post(`http://localhost:3000/wishlist`, wishList, {
+      .post(`https://blog-share-server.vercel.app/wishlist`, wishList, {
         withCredentials: true,
       })
       .then((res) => {
@@ -77,7 +77,7 @@ const FeaturedBlogs = () => {
   return (
     <section className="py-14 px-4  rounded-3xl max-w-7xl mx-auto">
       <div className="flex flex-col gap-3 justify-between items-center mb-8">
-        <h2 className="text-4xl font-extrabold text-[#A78BFAFF] text-center]">
+        <h2 className="text-4xl font-extrabold text-[#AA98A9] text-center]">
           Featured Blogs
         </h2>
         <button

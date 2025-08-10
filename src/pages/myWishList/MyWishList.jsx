@@ -12,7 +12,7 @@ const MyWishList = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/wishlist?email=${user.email}`, {
+        .get(`https://blog-share-server.vercel.app/wishlist?email=${user.email}`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -33,7 +33,7 @@ const MyWishList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/wishlist/${id}`, {
+          .delete(`https://blog-share-server.vercel.app/wishlist/${id}`, {
             withCredentials: true,
           })
           .then((res) => {

@@ -42,12 +42,12 @@ import MyBlogs from "../pages/myBlogs/MyBlogs";
              {
                 path: '/allBlogs',
                 element: <AllBlogs></AllBlogs>,
-                loader: ()=>fetch(`http://localhost:3000/blogs`)
+                loader: ()=>fetch(`https://blog-share-server.vercel.app/blogs`)
             },
              {
                 path: '/blogDetails/:id',
                 element: <PrivateRoute><BlogDetails></BlogDetails></PrivateRoute>,
-                loader: ({params})=>fetch(`http://localhost:3000/blogs/${params.id}`)
+                loader: ({params})=>fetch(`https://blog-share-server.vercel.app/blogs/${params.id}`)
             },
             {
                 path:'/myWishList',

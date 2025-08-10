@@ -6,6 +6,8 @@ import axios from "axios";
 
 const MyBlogs = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
+  
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
@@ -13,7 +15,7 @@ const MyBlogs = () => {
     if (!user?.email) return;
 
     axios
-      .get("http://localhost:3000/myBlogs", { withCredentials: true })
+      .get("https://blog-share-server.vercel.app/myBlogs", { withCredentials: true })
       .then((res) => {
         setBlogs(res.data);
       })
@@ -35,7 +37,7 @@ const MyBlogs = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/blogs/${id}`, { withCredentials: true })
+          .delete(`https://blog-share-server.vercel.app/blogs/${id}`, { withCredentials: true })
           .then(() => {
             setBlogs((prev) => prev.filter((blog) => blog._id !== id));
             Swal.fire("Deleted!", "Your blog has been deleted.", "success");

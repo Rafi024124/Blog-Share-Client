@@ -17,7 +17,7 @@ const AllBlogs = () => {
   // Fetch blogs when search/category/sortBy/sortOrder changes
   useEffect(() => {
     const fetchBlogs = async () => {
-      const url = new URL("http://localhost:3000/blogs");
+      const url = new URL("https://blog-share-server.vercel.app/blogs");
       if (searchTerm) url.searchParams.append("search", searchTerm);
       if (category) url.searchParams.append("category", category);
       if (sortBy) url.searchParams.append("sortBy", sortBy);
@@ -60,7 +60,7 @@ const AllBlogs = () => {
     };
 
     axios
-      .post(`http://localhost:3000/wishlist`, wishList, {
+      .post(`https://blog-share-server.vercel.app/wishlist`, wishList, {
         withCredentials: true,
       })
       .then((res) => {
@@ -94,7 +94,7 @@ const AllBlogs = () => {
       style={{ backgroundColor: "#1C1C1C" }}
     >
       <h2
-        className="text-4xl font-extrabold text-center mb-12 tracking-tight text-[#A78BFA]"
+        className="text-4xl font-extrabold text-center mb-12 tracking-tight text-[#AA98A9]"
        
       >
         All Blogs

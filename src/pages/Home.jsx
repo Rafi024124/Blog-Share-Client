@@ -15,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
    
-    fetch('http://localhost:3000/blogs?limit=6&sort=recent')
+    fetch('https://blog-share-server.vercel.app/blogs?limit=6&sort=recent')
       .then(res => res.json())
       .then(data => {
         setRecentBlogs(data)

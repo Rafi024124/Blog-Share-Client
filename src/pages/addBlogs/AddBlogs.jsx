@@ -4,10 +4,12 @@ import Swal from "sweetalert2";
 
 import { AuthContext } from "../../providers/AuthProvider";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddBlogs = () => {
   const { user } = useContext(AuthContext);
   const [imageURL, setImageURL] = useState("");
+   const navigate = useNavigate();
 
   const handleAddBlog = (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ const AddBlogs = () => {
     blogData.email = user?.email || "unknown";
 
     axios
-      .post(`http://localhost:3000/blogs`, blogData, {
+      .post(`https://blog-share-server.vercel.app/blogs`, blogData, {
         withCredentials: true,
       })
       .then((res) => {
@@ -31,6 +33,9 @@ const AddBlogs = () => {
           });
           e.target.reset();
           setImageURL("");
+          e.target.reset();
+          
+          navigate('/myBlogs');
         }
       });
   };

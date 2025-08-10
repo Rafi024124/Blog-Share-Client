@@ -16,7 +16,7 @@ const FeaturedBlogs = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/blogs")
+    fetch("https://blog-share-server.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => {
         const sorted = data
@@ -49,7 +49,7 @@ const FeaturedBlogs = () => {
         cell: ({ row, getValue }) => (
           <span
             onClick={() => handleDetails(row.original._id)}
-            className="text-[#4B4B80] hover:underline cursor-pointer font-semibold"
+            className="text-[#AA98A9] hover:underline cursor-pointer font-semibold"
             title="View Blog Details"
           >
             {getValue()}
@@ -91,21 +91,21 @@ const FeaturedBlogs = () => {
 
   return (
     <div
-      className="p-6 min-h-screen"
+      className="p-6 min-h-screen max-w-7xl mx-auto mt-2 mb-2"
       style={{
-        background: "#F0F0FF", // subtle very light periwinkle background
+        background: "#2A2540", // dark purple background
       }}
     >
       <h2
         className="text-3xl font-bold mb-6 text-center"
-        style={{ color: "#7F7FCC" }} // muted medium periwinkle for heading
+        style={{ color: "#AA98A9" }} // soft purple heading
       >
         🌟 Featured Blogs (Top 10 by Word Count)
       </h2>
 
       <div
         className="overflow-x-auto rounded-lg shadow-md"
-        style={{ border: "1.5px solid #CCCCFF" }} // border with #CCCCFF
+        style={{ border: "1.5px solid #AA98A9" }} // soft purple border
       >
         <table
           className="table w-full"
@@ -113,8 +113,8 @@ const FeaturedBlogs = () => {
         >
           <thead
             style={{
-              backgroundColor: "#D6D6FF", // lighter periwinkle header
-              color: "#7F7FCC",
+              backgroundColor: "#3B3655", // darker purple header bg
+              color: "#AA98A9",
             }}
           >
             {table.getHeaderGroups().map((headerGroup) => (
@@ -146,9 +146,9 @@ const FeaturedBlogs = () => {
                 key={row.id}
                 className="rounded-lg"
                 style={{
-                  backgroundColor: "#CCCCFF", // your requested pastel periwinkle row background
-                  color: "#4B4B80", // darker periwinkle text
-                  boxShadow: "0 1px 3px rgba(204, 204, 255, 0.5)",
+                  backgroundColor: "#2E2A45", // slightly lighter dark purple rows
+                  color: "#C1B8D4", // lighter soft purple text
+                  boxShadow: "0 1px 3px rgba(170, 152, 169, 0.4)",
                 }}
               >
                 {row.getVisibleCells().map((cell) => (

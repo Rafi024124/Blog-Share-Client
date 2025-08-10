@@ -1,79 +1,107 @@
-import React, { useContext, useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useState, useEffect, useRef } from 'react';
+import { Link, NavLink} from "react-router-dom";
 import { AuthContext } from '../providers/AuthProvider';
 import BlogLoader from './BlogLoader';
 
 const Navbar = () => {
   const { user, isLoading } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+ 
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const links = (
-  <>
-    <li>
-      <NavLink
-        to="/"
-        style={{ color: '#483248' }}
-        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
-      >
-        Home
-      </NavLink>
-    </li>
-    {user && (
-      <>
-        <li>
-          <NavLink
-            to="/addBlogs"
-            style={{ color: '#483248' }}
-            className={({ isActive }) => isActive ? "active-link " : "nav-link"}
-          >
-            Add Blog
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/myBlogs"
-            style={{ color: '#483248' }}
-            className={({ isActive }) => isActive ? "active-link" : "nav-link"}
-          >
-            My Blogs
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/myWishList"
-            style={{ color: '#483248' }}
-            className={({ isActive }) => isActive ? "active-link" : "nav-link"}
-          >
-            Wishlist
-          </NavLink>
-        </li>
-      </>
-    )}
-    <li>
-      <NavLink
-        to="/allBlogs"
-        style={{ color: '#483248' }}
-        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
-      >
-        All Blogs
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to="/featuredBlogs"
-        style={{ color: '#483248' }}
-        className={({ isActive }) => isActive ? "active-link" : "nav-link"}
-      >
-        Featured Blogs
-      </NavLink>
-    </li>
-  </>
-);
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
 
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // Links JSX with onClick to close menu on mobile
+  const links = (
+    <>
+      <li>
+        <NavLink
+          to="/"
+          style={{ color: '#483248' }}
+          className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Home
+        </NavLink>
+      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="/addBlogs"
+              style={{ color: '#483248' }}
+              className={({ isActive }) => isActive ? "active-link " : "nav-link"}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Add Blog
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/myBlogs"
+              style={{ color: '#483248' }}
+              className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              My Blogs
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/myWishList"
+              style={{ color: '#483248' }}
+              className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Wishlist
+            </NavLink>
+          </li>
+        </>
+      )}
+      <li>
+        <NavLink
+          to="/allBlogs"
+          style={{ color: '#483248' }}
+          className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          All Blogs
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/featuredBlogs"
+          style={{ color: '#483248' }}
+          className={({ isActive }) => isActive ? "active-link" : "nav-link"}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Featured Blogs
+        </NavLink>
+      </li>
+    </>
+  );
 
   if (isLoading) {
     return <BlogLoader />;
@@ -82,7 +110,7 @@ const Navbar = () => {
   return (
     <div
       className="navbar shadow-sm sticky top-0 z-50"
-     style={{
+      style={{
         background:
           "linear-gradient(135deg, rgba(203,195,227,0.99), rgba(170,152,169,0.85))",
         border: "1.5px solid rgba(170, 152, 169, 0.5)",
@@ -96,11 +124,14 @@ const Navbar = () => {
       </div>
 
       {/* Small screens */}
-      <div className="flex lg:hidden md:hidden justify-center items-center w-full relative">
+      <div
+        className="flex lg:hidden md:hidden justify-center items-center w-full relative"
+        ref={menuRef} // ref to detect outside clicks
+      >
         <button
           onClick={handleMenuToggle}
           className="focus:outline-none"
-          style={{ color: "#AA98A9" }} // text color for hamburger icon
+          style={{ color: "#7A6877" }} // text color for hamburger icon
           aria-label="Toggle menu"
         >
           {/* Hamburger Icon */}
